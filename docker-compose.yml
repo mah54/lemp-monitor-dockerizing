@@ -1,0 +1,15 @@
+services:
+  db:
+    build: lemp-dockerfiles/mysql-dockerfile
+    container_name: database-c
+    restart: unless-stopped
+    ports:
+      - "3307:3306"
+    networks:
+      - wp-net
+#    network_mode: host
+
+networks:
+  wp-net:
+    driver: bridge
+
