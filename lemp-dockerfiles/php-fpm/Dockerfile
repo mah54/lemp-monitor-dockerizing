@@ -20,7 +20,7 @@ RUN sed -i  s/DBNAME/$DBNAME/g  /var/www/wordpress/wp-config.php && \
     curl -s https://api.wordpress.org/secret-key/1.1/salt/ >> /var/www/wordpress/wp-config.php && \
     chown -R www-data:www-data /var/www/wordpress
 
-
+VOLUME [ "/var/www/wordpress" ]
 
 EXPOSE 9000
 
