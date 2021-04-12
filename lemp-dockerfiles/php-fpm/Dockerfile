@@ -24,4 +24,4 @@ VOLUME [ "/var/www/wordpress" ]
 
 EXPOSE 9000
 
-CMD    [ "/usr/sbin/php-fpm7.2" ]
+CMD    [ "/usr/sbin/php-fpm7.2", "-F" ]
