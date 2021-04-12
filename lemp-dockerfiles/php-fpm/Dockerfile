@@ -24,4 +24,4 @@ RUN sed -i  s/DBNAME/$DBNAME/g  /var/www/wordpress/wp-config.php && \
 
 EXPOSE 9000
 
-CMD service php7.2-fpm start
+CMD    [ "/usr/sbin/php-fpm7.2" ]
