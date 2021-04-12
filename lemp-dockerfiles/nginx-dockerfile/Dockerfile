@@ -10,7 +10,9 @@ RUN apt-get update && \
     chown -R www-data:www-data /var/lib/nginx && \
     echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
     unlink /etc/nginx/sites-enabled/default
-#    mkdir /var/www/wordpress && \
+    mkdir /var/www/wordpress && \
+    chown -R www-data:www-data /var/www/wordpress
+
 #    curl -o /bin/wp-cli https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
 #    chmod +x /bin/wp-cli
 
