@@ -21,8 +21,6 @@ RUN sed -i  s/DBNAME/$DBNAME/g  /var/www/wordpress/wp-config.php && \
     chown -R www-data:www-data /var/www/wordpress && \
     mkdir -p /run/php/
 
-#VOLUME [ "/var/www/wordpress" ]
-
 EXPOSE 9000
 
-CMD    [ "/usr/sbin/php-fpm7.2", "-F", "-R" ]
+CMD [ "/usr/sbin/php-fpm7.2", "-F", "-R" ]
