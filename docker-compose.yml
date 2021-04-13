@@ -25,6 +25,20 @@ services:
     networks:
       - wp-net
     
+  web:
+    build: lemp-dockerfiles/nginx-dockerfile
+    container_name: nginx
+    restart: always
+    links:
+      - php-fpm-wordpress
+    volumes:
+      - /opt/www:/var/www/wordpress
+      - /opt/mysql:/var/lib/mysql
+    ports:
+      - 81:80
+    networks:
+      - wp-net
+
 networks:
   wp-net:
     driver: bridge
