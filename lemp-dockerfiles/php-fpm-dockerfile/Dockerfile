@@ -21,7 +21,7 @@ RUN sed -i  s/DBNAME/$DBNAME/g  /var/www/wordpress/wp-config.php && \
     chown -R www-data:www-data /var/www/wordpress && \
     mkdir -p /run/php/
 
-VOLUME [ "/var/www/wordpress" ]
+#VOLUME [ "/var/www/wordpress" ]
 
 EXPOSE 9000
 
