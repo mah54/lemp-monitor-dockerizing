@@ -9,7 +9,7 @@ RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y nginx php-mysql curl && \
     chown -R www-data:www-data /var/lib/nginx && \
     echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
-    unlink /etc/nginx/sites-enabled/default
+    unlink /etc/nginx/sites-enabled/default && \
     mkdir /var/www/wordpress && \
     chown -R www-data:www-data /var/www/wordpress
 
@@ -21,7 +21,7 @@ RUN apt-get update && \
 #RUN bash /tmp/install-wordpress.sh && \
 #    chown -R www-data:www-data /var/www/wordpress
 
-VOLUME ["/etc/nginx"]
+#VOLUME ["/etc/nginx"]
 
 EXPOSE 80
 
