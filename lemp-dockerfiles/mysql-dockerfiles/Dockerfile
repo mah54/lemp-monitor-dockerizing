@@ -16,7 +16,7 @@ RUN apt-get update \
  && chmod 755 -R /var/lib/mysql/* \
  && bash /tmp/wordpress-database.sh
 
-VOLUME ["/etc/mysql", "/var/lib/mysql"]
+#VOLUME ["/etc/mysql", "/var/lib/mysql"]
  
 EXPOSE 3306
 
