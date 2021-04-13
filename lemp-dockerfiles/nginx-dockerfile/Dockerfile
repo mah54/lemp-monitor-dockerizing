@@ -13,13 +13,10 @@ RUN apt-get update && \
     mkdir /var/www/wordpress && \
     chown -R www-data:www-data /var/www/wordpress
 
-#    curl -o /bin/wp-cli https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
-#    chmod +x /bin/wp-cli
+COPY WP_DOMAIN.conf /etc/nginx/sites-enabled/
 
-#COPY install-wordpress.sh /tmp/
-
-#RUN bash /tmp/install-wordpress.sh && \
-#    chown -R www-data:www-data /var/www/wordpress
+RUN mv /etc/nginx/sites-enabled/WP_DOMAIN.conf /etc/nginx/sites-enabled/$WP_DOMAIN.conf && \
+    sed -i  s/WP_DOMAIN/$WP_DOMAIN/g  /etc/nginx/sites-enabled/$WP_DOMAIN.conf
 
 #VOLUME ["/etc/nginx"]
 
