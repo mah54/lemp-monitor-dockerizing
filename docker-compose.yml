@@ -4,7 +4,7 @@ services:
     container_name: database
     restart: unless-stopped
     volumes:
-      - /opt/mysql:/var/lib/mysql
+      - mysql:/var/lib/mysql
     ports:
       - "3307:3306"
     networks:
@@ -18,8 +18,8 @@ services:
     links:
       - db
     volumes:
-      - /opt/www:/var/www/wordpress
-      - /opt/mysql:/var/lib/mysql
+      - www:/var/www/wordpress
+      - mysql:/var/lib/mysql
     ports:
       - 9001:9000
     networks:
@@ -32,8 +32,8 @@ services:
     links:
       - php-fpm-wordpress
     volumes:
-      - /opt/www:/var/www/wordpress
-      - /opt/mysql:/var/lib/mysql
+      - www:/var/www/wordpress
+      - mysql:/var/lib/mysql
     ports:
       - 81:80
     networks:
@@ -43,3 +43,6 @@ networks:
   wp-net:
     driver: bridge
 
+volumes:
+  mysql:
+  www:
