@@ -4,12 +4,11 @@ services:
     container_name: database
     restart: unless-stopped
     volumes:
-      - mysql:/var/lib/mysql
+      - database:/var/lib/mysql
     ports:
-      - "3307:3306"
+      - "3306:3306"
     networks:
       - wp-net
-#    network_mode: host
 
   php-fpm-wordpress:
     build: lemp-dockerfiles/php-fpm-dockerfile
@@ -19,9 +18,8 @@ services:
       - db
     volumes:
       - www:/var/www/wordpress
-      - mysql:/var/lib/mysql
     ports:
-      - 9001:9000
+      - 9000:9000
     networks:
       - wp-net
     
@@ -33,9 +31,8 @@ services:
       - php-fpm-wordpress
     volumes:
       - www:/var/www/wordpress
-      - mysql:/var/lib/mysql
     ports:
-      - 81:80
+      - 80:80
     networks:
       - wp-net
 
@@ -44,5 +41,5 @@ networks:
     driver: bridge
 
 volumes:
-  mysql:
+  database:
   www:
