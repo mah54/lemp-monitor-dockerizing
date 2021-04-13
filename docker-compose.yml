@@ -1,14 +1,30 @@
 services:
   db:
-    build: lemp-dockerfiles/mysql-dockerfile
-    container_name: database-c
+    build: lemp-dockerfiles/mysql-dockerfiles
+    container_name: database
     restart: unless-stopped
+    volumes:
+      - /opt/mysql:/var/lib/mysql
     ports:
       - "3307:3306"
     networks:
       - wp-net
 #    network_mode: host
 
+  php-fpm-wordpress:
+    build: lemp-dockerfiles/php-fpm-dockerfile
+    container_name: wordpress
+    restart: always
+    links:
+      - db
+    volumes:
+      - /opt/www:/var/www/wordpress
+      - /opt/mysql:/var/lib/mysql
+    ports:
+      - 9001:9000
+    networks:
+      - wp-net
+    
 networks:
   wp-net:
     driver: bridge
