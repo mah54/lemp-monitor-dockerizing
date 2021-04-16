@@ -14,7 +14,7 @@ services:
     build: lemp-dockerfiles/php-fpm-dockerfile
     container_name: wordpress
     restart: always
-    links:
+    depends_on:
       - db
     volumes:
       - www:/var/www/wordpress
@@ -27,7 +27,7 @@ services:
     build: lemp-dockerfiles/nginx-dockerfile
     container_name: nginx
     restart: always
-    links:
+    depends_on:
       - php-fpm-wordpress
     volumes:
       - www:/var/www/wordpress
