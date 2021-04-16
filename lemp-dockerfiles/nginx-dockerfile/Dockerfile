@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu
 
 ENV DBNAME="wp_db" \
     DBUSER="wp_user" \

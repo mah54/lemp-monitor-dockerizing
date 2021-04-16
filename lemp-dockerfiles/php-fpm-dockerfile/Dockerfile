@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu
 
 ENV DBNAME="wp_db" \
     DBUSER="wp_user" \
@@ -21,6 +21,6 @@ RUN sed -i  s/DBNAME/$DBNAME/g  /var/www/wordpress/wp-config.php && \
     chown -R www-data:www-data /var/www/wordpress && \
     mkdir -p /run/php/
 
-EXPOSE 9000
+#EXPOSE 9000
 
-CMD [ "/usr/sbin/php-fpm7.2", "-F", "-R" ]
+CMD [ "/usr/sbin/php-fpm7.4", "-F", "-R" ]

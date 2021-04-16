@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu
 
 ENV DBNAME="wp_db" \
     DBUSER="wp_user" \
@@ -18,6 +18,6 @@ RUN apt-get update \
 
 #VOLUME ["/etc/mysql", "/var/lib/mysql"]
  
-EXPOSE 3306
+#EXPOSE 3306
 
 CMD ["mysqld_safe"]
