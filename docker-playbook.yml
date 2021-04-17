@@ -1,0 +1,13 @@
+- hosts: lempstack
+  become: true
+  become_user: root
+
+  tasks:
+    - name: set shecan as netplan nameservers
+      ansible.builtin.copy:
+        src: data/00-netcfg.yaml
+        dest: /etc/netplan/00-netplan.yml
+
+    - name: accept changes in netplan
+      command: "netplan apply"
+      ignore_errors: true
