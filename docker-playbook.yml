@@ -11,3 +11,30 @@
     - name: accept changes in netplan
       command: "netplan apply"
       ignore_errors: true
+
+    - name: uninstall old docker versions
+      apt:
+        name:
+          [
+            docker,
+            docker-engine,
+            docker.io,
+            containerd,
+            runc
+          ]
+        state: absent
+        update_cache: yes
+
+    - name: set up the repository
+      apt:
+        name:
+          [
+            apt-transport-https,
+            ca-certificates,
+            curl,
+            gnupg,
+            lsb-release,
+            software-properties-common
+          ]
+        state: latest
+        update_cache: yes
