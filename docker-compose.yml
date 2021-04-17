@@ -1,6 +1,6 @@
 services:
   db:
-    build: lemp-dockerfiles/mysql-dockerfiles
+    image: $MYSQL_SERVER
     container_name: database
     restart: unless-stopped
     volumes:
@@ -11,7 +11,7 @@ services:
       - wp-net
 
   php-fpm-wordpress:
-    build: lemp-dockerfiles/php-fpm-dockerfile
+    image: $PHP_FPM
     container_name: wordpress
     restart: always
     depends_on:
@@ -24,7 +24,7 @@ services:
       - wp-net
     
   web:
-    build: lemp-dockerfiles/nginx-dockerfile
+    image: $WEB_SERVER
     container_name: nginx
     restart: always
     depends_on:
