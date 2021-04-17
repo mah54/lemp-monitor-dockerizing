@@ -50,17 +50,15 @@
         state: latest
         update_cache: yes
 
-    - name: Add an Apt signing key to a specific keyring file
+    - name: Add an apt signing key to a specific keyring file
       ansible.builtin.apt_key:
-        id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
         url: https://download.docker.com/linux/ubuntu/gpg
         keyring: /usr/share/keyrings/docker-archive-keyring.gpg
         state: present
-      ignore_errors: true
 
     - name: Add Docker stable repository.
       apt_repository:
-        repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/li>
+        repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu bionic stable"
         state: present
         update_cache: yes
 
@@ -93,9 +91,13 @@
         state: latest
         update_cache: yes
 
-    - name: install docker pip
+    - name: install docker and docker-compose
       pip:
-        name: docker
+        name:
+          [ 
+            docker,
+            docker-compose
+          ]
 
     - name: log into docker registry
       docker_login:
@@ -104,17 +106,12 @@
         password: "{{ docker_password }}"
         reauthorize: yes
 
-    - name: install docker-compose
-      shell: 'curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m>
+    - name: Tear down existing services
+      community.docker.docker_compose:
+        project_src: /home/ubuntu/lemp-monitor-dockerizing
+        state: absent
 
-    - name: set executing permissions to docker-compose
-      ansible.builtin.file:
-        path: /usr/local/bin/docker-compose
-        state: touch
-        mode: +x
-
-    - name: tear down existing services
-      shell: "cd /home/ubuntu/lemp-monitor-dockerizing && docker-compose down"
-
-    - name: create and start services
-      shell: "cd /home/ubuntu/lemp-monitor-dockerizing && docker-compose up -d"
+    - name: Create and start services
+      community.docker.docker_compose:
+        project_src: /home/ubuntu/lemp-monitor-dockerizing
+      register: output
