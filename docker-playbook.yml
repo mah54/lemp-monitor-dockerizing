@@ -112,3 +112,9 @@
         path: /usr/local/bin/docker-compose
         state: touch
         mode: +x
+
+    - name: tear down existing services
+      shell: "cd /home/ubuntu/lemp-monitor-dockerizing && docker-compose down"
+
+    - name: create and start services
+      shell: "cd /home/ubuntu/lemp-monitor-dockerizing && docker-compose up -d"
