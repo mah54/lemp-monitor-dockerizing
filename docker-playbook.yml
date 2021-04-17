@@ -63,3 +63,11 @@
           ]
         state: latest
         update_cache: yes
+
+    - name: add ubuntu user to docker group
+      shell: "usermod -aG docker ubuntu"
+
+    - name: clone git repository
+      git:
+        repo: "https://github.com/mah54/lemp-monitor-dockerizing.git"
+        dest: /home/ubuntu/lemp-monitor-dockerizing
