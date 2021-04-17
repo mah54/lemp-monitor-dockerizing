@@ -3,5 +3,5 @@ This project uses stored values in .env. In order to build images from Dockerfil
 
 For running playbook first make sure community general collection is installed by:
     ansible-galaxy collection install community.general
-Then run the playbook using:
+Then add hosts to data/hosts and run the playbook using:
     ansible-playbook -i data/hosts docker-playbook.yml
