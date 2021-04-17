@@ -52,3 +52,14 @@
         repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/li>
         state: present
         update_cache: yes
+
+    - name: install docker engine
+      apt:
+        name:
+          [
+            docker-ce,
+            docker-ce-cli,
+            containerd.io
+          ]
+        state: latest
+        update_cache: yes
