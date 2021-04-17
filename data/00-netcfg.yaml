@@ -1,0 +1,7 @@
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eth0:
+      nameservers:
+          addresses: [178.22.122.100, 185.51.200.2]
