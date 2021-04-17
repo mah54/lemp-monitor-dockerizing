@@ -2,6 +2,17 @@
   become: true
   become_user: root
 
+  vars_files:
+    - data/variables.yml
+
+  vars_prompt:
+    - name: "docker_username"
+      prompt: "Enter your docker registry username"
+      private: no
+    - name: "docker_password"
+      prompt: "Enter your docker registry password"
+      private: yes
+
   tasks:
     - name: set shecan as netplan nameservers
       ansible.builtin.copy:
@@ -71,3 +82,24 @@
       git:
         repo: "https://github.com/mah54/lemp-monitor-dockerizing.git"
         dest: /home/ubuntu/lemp-monitor-dockerizing
+
+    - name: install docker_login ansible module prerequisites
+      apt:
+        name:
+          [
+            python3,
+            python3-pip,
+          ]
+        state: latest
+        update_cache: yes
+
+    - name: install docker pip
+      pip:
+        name: docker
+
+    - name: log into docker registry
+      docker_login:
+        registry_url: "{{ docker_registry }}"
+        username: "{{ docker_username }}"
+        password: "{{ docker_password }}"
+        reauthorize: yes
