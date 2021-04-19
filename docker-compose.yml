@@ -36,6 +36,18 @@ services:
     networks:
       - wp-net
 
+  prometheus:
+    image: $PROMETHEUS
+    container_name: prometheus
+    restart: always
+    volumes:
+      - prometheus:/opt/prometheus
+    ports:
+      - 9090:9090
+    networks:
+      wp-net:
+
+
 networks:
   wp-net:
     driver: bridge
@@ -43,3 +55,4 @@ networks:
 volumes:
   database:
   www:
+  prometheus:
