@@ -17,7 +17,7 @@
     - name: set shecan as netplan nameservers
       ansible.builtin.copy:
         src: data/00-netcfg.yaml
-        dest: /etc/netplan/00-netplan.yml
+        dest: /etc/netplan/00-netcfg.yaml
 
     - name: accept changes in netplan
       command: "netplan apply"
